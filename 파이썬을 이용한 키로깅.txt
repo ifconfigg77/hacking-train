@@ -1,0 +1,19 @@
+import pythoncom
+import win32api
+import pyWinhook as pyHook
+
+def OnkeyboardEvent(event):
+    print('++ Key:', event.Key, end='')
+    print('  KeyID:', event.KeyID)
+    return True
+
+def run():
+    hm = pyHook.HookManager()
+    hm.KeyDown = OnkeyboardEvent
+    hm.HookKeyboard()
+    pythoncom.PumpMessages()
+
+def main():
+    run()
+
+main()
